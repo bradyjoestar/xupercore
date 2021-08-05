@@ -137,10 +137,11 @@ func (t *Miner) Start() {
 			ctx.GetLog().Trace("compete master result", "height", ledgerTipHeight+1, "isMiner", isMiner, "isSync", isSync, "err", err)
 		}
 		// 3.如需要同步，尝试同步网络最新区块
-		if err == nil && isMiner && isSync {
-			err = t.trySyncBlock(ctx, nil)
-			ctx.Timer.Mark("SyncBlock")
-		}
+		//wenbin delete , we needn't sync in tmConsensu
+		//if err == nil && isMiner && isSync {
+		//	err = t.trySyncBlock(ctx, nil)
+		//	ctx.Timer.Mark("SyncBlock")
+		//}
 		// 4.如果是矿工，出块
 		if err == nil && isMiner {
 			beginTime := time.Now()
