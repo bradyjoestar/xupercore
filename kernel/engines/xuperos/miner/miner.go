@@ -235,7 +235,8 @@ func (t *Miner) mining(ctx xctx.XContext) error {
 	}
 
 	// 6.异步广播新生成的区块
-	go t.broadcastBlock(ctx, block)
+	// wenbin canceled ,for single node
+	//go t.broadcastBlock(ctx, block)
 
 	ctx.GetLog().Info("finish new block generation", "blockId", utils.F(block.GetBlockid()),
 		"height", height, "txCount", block.TxCount, "size", proto.Size(block), "costs", ctx.GetTimer().Print())

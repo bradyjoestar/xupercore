@@ -244,7 +244,8 @@ func (p *P2PServerV2) Start() {
 	p.log.Trace("StartP2PServer", "address", p.host.Addrs())
 	p.host.SetStreamHandler(protocol.ID(protocolID), p.streamHandler)
 
-	p.setKdhtValue()
+	//wenbin canceled, for single node
+	//p.setKdhtValue()
 
 	ctx, cancel := context.WithCancel(p.ctx)
 	p.cancel = cancel
