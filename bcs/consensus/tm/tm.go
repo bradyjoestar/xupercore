@@ -51,6 +51,22 @@ func (s *TMConsensus) GetConsensusStatus() (base.ConsensusStatus, error) {
 	return nil, nil
 }
 
+// 共识实例的挂起逻辑, 另: 若共识实例发现绑定block结构有误，会直接停掉当前共识实例并panic
+func (s *TMConsensus) Stop() error {
+	return nil
+}
+
+// 共识实例的启动逻辑
+func (s *TMConsensus) Start() error {
+	return nil
+}
+
+// ParseConsensusStorage 共识占用blockinterface的专有存储，特定共识需要提供parse接口，在此作为接口高亮
+// Single共识没有用到区块存储信息, 故返回空
+func (s *TMConsensus) ParseConsensusStorage(block cctx.BlockInterface) (interface{}, error) {
+	return nil, nil
+}
+
 type TMConfig struct {
 	Miner string `json:"miner"`
 	// 单位为毫秒
