@@ -5,19 +5,19 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"strconv"
-	"time"
-
 	"github.com/xuperchain/xupercore/kernel/common/xcontext"
 	"github.com/xuperchain/xupercore/kernel/consensus"
 	"github.com/xuperchain/xupercore/kernel/consensus/base"
 	cctx "github.com/xuperchain/xupercore/kernel/consensus/context"
 	"github.com/xuperchain/xupercore/kernel/consensus/def"
+	"strconv"
+	"time"
 )
 
 // 本次TM改造支持TM的升级，即Miner地址可变
 var (
 	MinerAddressErr = errors.New("Block's proposer must be equal to its address.")
+	BeginBlockChan  = make(chan int, 1)
 )
 
 func init() {
@@ -75,10 +75,12 @@ func NewTMConsensus(cCtx cctx.ConsensusCtx, cCfg def.ConsensusConfig) base.Conse
 // CompeteMaster 返回是否为矿工以及是否需要进行SyncBlock
 // 该函数返回两个bool，第一个表示是否当前应当出块，第二个表示是否当前需要向其他节点同步区块
 func (s *TMConsensus) CompeteMaster(height int64) (bool, bool, error) {
-	time.Sleep(time.Duration(s.config.Period) * time.Millisecond)
+	//time.Sleep(time.Duration(s.config.Period) * time.Millisecond)
 
-	fmt.Println("==================wenbin test begin=========================")
-	fmt.Println("==================wenbin test end=========================")
+	//tmp block here
+	v := <-BeginBlockChan
+	fmt.Println(time.Now().UTC().String())
+	fmt.Println("BeginBlockChain:" + strconv.Itoa(v))
 
 	if s.ctx.Address.Address == s.config.Miner {
 		// TM共识确定miner后只能通过共识升级改变miner，因此在单个TM实例中miner是不可更改的
