@@ -77,6 +77,9 @@ func NewTMConsensus(cCtx cctx.ConsensusCtx, cCfg def.ConsensusConfig) base.Conse
 func (s *TMConsensus) CompeteMaster(height int64) (bool, bool, error) {
 	time.Sleep(time.Duration(s.config.Period) * time.Millisecond)
 
+	fmt.Println("==================wenbin test begin=========================")
+	fmt.Println("==================wenbin test end=========================")
+
 	if s.ctx.Address.Address == s.config.Miner {
 		// TM共识确定miner后只能通过共识升级改变miner，因此在单个TM实例中miner是不可更改的
 		// 此时一个miner从始至终都是自己在挖矿，故不需要向其他节点同步区块
