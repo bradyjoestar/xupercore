@@ -133,6 +133,7 @@ func (t *NetEvent) procAsyncMsg(request *protos.XuperMessage) {
 		XLog:  log,
 		Timer: timer.NewXTimer(),
 	}
+	fmt.Println("we are proc async msg")
 	if handle, ok := AsyncMsgList[request.GetHeader().GetType()]; ok {
 		beginTime := time.Now()
 		handle(ctx, request)
