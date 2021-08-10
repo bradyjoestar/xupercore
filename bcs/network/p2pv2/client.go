@@ -27,6 +27,7 @@ var (
 // SendMessage send message to peers using given filter strategy
 func (p *P2PServerV2) SendMessage(ctx xctx.XContext, msg *pb.XuperMessage,
 	optFunc ...p2p.OptionFunc) error {
+	fmt.Println("we are send message by sendMessage interface")
 	ctx = &xctx.BaseCtx{XLog: ctx.GetLog(), Timer: timer.NewXTimer()}
 	tm := time.Now()
 	defer func() {
@@ -111,6 +112,9 @@ func (p *P2PServerV2) sendMessage(ctx xctx.XContext, msg *pb.XuperMessage, peerI
 func (p *P2PServerV2) SendMessageWithResponse(ctx xctx.XContext, msg *pb.XuperMessage,
 	optFunc ...p2p.OptionFunc) ([]*pb.XuperMessage, error) {
 	ctx = &xctx.BaseCtx{XLog: ctx.GetLog(), Timer: timer.NewXTimer()}
+	fmt.Println("we are sendMessage with response by sendMessageWithResponse")
+
+
 	tm := time.Now()
 	defer func() {
 		if p.ctx.EnvCfg.MetricSwitch {
